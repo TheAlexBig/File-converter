@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ARI</title>
+    <script type="text/javascript" th:src="@{/js/result.js}"></script>
+</head>
+<body>
+    <a th:href="@{/}">Subir otro archivo</a>
+    <div th:if="${result!=null}">
+        <h3>Archivos generados</h3>
+        <div th:each="r : ${result}" class="file-results">
+            <label th:text="${'Resultado de transformación a '+ r.type}"></label>
+            <br>
+            <textarea th:text="${r.getDocument()}"></textarea>
+            <br>
+            <span hidden th:text="${r.type}"></span>
+            <button class="download">Descargar</button>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ARI</title>
+</head>
+<body>
+    <div th:if="${!uploadForm.isCreated()}">
+        <form  method="POST" enctype="multipart/form-data" th:action="@{/upload}">
+            <h3>Ingreso el archivo a procesar</h3>
+            <p><label>Archivo a subir: <input type="file" name="file" /></label></p>
+            <p><input type="submit" value="Subir" /></p>
+        </form>
+        <form  method="POST" enctype="multipart/form-data" th:action="@{/token}">
+            <h3>Decifrar JWT</h3>
+            <p><label>Archivo a subir: <input type="text" name="jwtData" /></label></p>
+            <p><input type="submit" value="Descifrar" /></p>
+        </form>
+    </div>
+    <div th:if="${uploadForm.isCreated()}" >
+        <a th:href="@{/}">Subir otro archivo</a>
+        <form th:object="${uploadForm}" th:modelAttribute="uploadForm" th:action="@{/action/{type}(type=${uploadForm.getType()})}" th:method="POST">
+            <h3 th:text="${uploadForm.getFilename()+'.'+uploadForm.getExt()}"></h3>
+            <p>El archivo fue identificado y se ha determinado que es un <label th:text="${uploadForm.getType()}"></label></p>
+            <div th:if="${uploadForm.getType().equals('json')}">
+                <p id="delimiterJson"><label>Delimitador (defecto ';'): <input th:field="*{delimiter}" type="text" name="delimiter" /></label></p>
+                <p id="vigenereJson"><label>Clave Vigenere: <input th:field="*{vigenere}" type="text" name="delimiter" /></label></p>
+            </div>
+            <div th:if="${uploadForm.getType().equals('xml')}">
+                <p id="delimiterXml"><label>Delimitador (defecto ';'): <input th:field="*{delimiter}" type="text" name="delimiter" /></label></p>
+                <p id="vigenereXml"><label>Clave Vigenere: <input th:field="*{vigenere}" type="text" name="delimiter" /></label></p>
+            </div>
+            <div th:if="${uploadForm.getType().equals('txt')}" >
+                <p id="delimiterTxt"><label>Delimitador: <input th:field="*{delimiter}" type="text" name="delimiter" /></label></p>
+                <p id="vigenereTxt"><label>Clave Vigenere: <input th:field="*{vigenere}" type="text" name="delimiter" /></label></p>
+            </div>
+            <p><textarea disabled th:text="${uploadForm.getContent()}"></textarea></p>
+            <p><input type="submit"  th:value="Transformar"/></p>
+        </form>
+    </div>
+</body>
+</html>

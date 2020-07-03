@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Entry",
+    "description": "Check if input is a json",
+    "type": "object",
+    "properties": {
+        "clientes": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/cliente"}
+        }
+    },
+    "definitions": {
+            "cliente": {
+                "type" : "object",
+                "required": ["documento", "primer-nombre", "apellido","credit-card","tipo","telefono"],
+                "properties": {
+                    "documento": {
+                        "type": "string",
+                        "pattern": "[0-9-]+"
+                    },
+                    "primer-nombre": {
+                        "type": "string"
+                    },
+                    "apellido": {
+                        "type": "string"
+                    },
+                    "credit-card": {
+                        "type": "string"
+                    },
+                    "tipo": {
+                        "type": "string"
+                    },
+                    "telefono": {
+                        "type": "string",
+                        "pattern": "[0-9]+"
+                    }
+                }
+
+            }
+        }
+    }
+}
