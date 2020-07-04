@@ -4,8 +4,9 @@ import com.ari.project.domain.UploadedFile;
 
 public class UploadForm extends UploadedFile {
     private String destination = "";
-    private String delimiter = "";
-    private String vigenere = "";
+    private String origin = "";
+    private String delimiter = ";";
+    private String vigenere = "k";
 
     public UploadForm(){
     }
@@ -19,6 +20,14 @@ public class UploadForm extends UploadedFile {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public String getDelimiter() {

@@ -31,9 +31,10 @@ public class FileServiceImp implements FileService {
 
         uploadedFile.setFilename(result[0]);
         uploadedFile.setExt(result[1]);
+
         uploadedFile.setType(TypeIdentifier.identifyType(content));
         uploadedFile.setContent(CustomFileUtil.fileContent(file));
-        uploadedFile.setCreated(true);
+        uploadedFile.setUploaded(true);
         return uploadedFile;
     }
 
@@ -51,16 +52,11 @@ public class FileServiceImp implements FileService {
             uploadedFile.setFilename(filename);
             uploadedFile.setType(type);
             uploadedFile.setExt(ext);
-            uploadedFile.setCreated(true);
+            uploadedFile.setUploaded(true);
         }
         catch (ExpiredJwtException | MalformedJwtException | UnsupportedJwtException e){
-
+            System.out.println("Exception: "+e.getMessage());
         }
-        return uploadedFile;
-    }
-
-    public UploadedFile prepareFile(String jwt) throws IOException {
-        UploadedFile uploadedFile = new UploadedFile();
         return uploadedFile;
     }
 

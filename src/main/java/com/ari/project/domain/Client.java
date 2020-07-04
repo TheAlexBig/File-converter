@@ -8,11 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "cliente")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Client {
-
-    private String documento = "";
+    @XmlElement(name = "documento")
+    private String document = "";
     @XmlElement(name = "primer-nombre")
-    private String nombre = "";
-    private String apellido = "";
+    private String name = "";
+    @XmlElement(name = "apellido")
+    private String lastName = "";
     @XmlElement(name = "credit-card")
     private String creditCard = "";
     @XmlElement(name = "tipo")
@@ -20,28 +21,28 @@ public class Client {
     @XmlElement(name = "telefono")
     private String phone = "";
 
-    public String getDocumento() {
-        return documento;
+    public String getDocument() {
+        return document;
     }
 
-    public void setDocumento(String documento) {
-        this.documento = documento;
+    public void setDocument(String document) {
+        this.document = document;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getCreditCard() {

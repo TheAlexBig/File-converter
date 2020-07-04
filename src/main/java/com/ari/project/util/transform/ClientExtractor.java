@@ -14,54 +14,53 @@ import java.util.Arrays;
 import java.util.List;
 
 class ClientExtractor {
-    List<Client> processTxt(UploadForm uploadForm){
+    Clients processTxt(UploadForm uploadForm){
         String[] lines = uploadForm.getContent().split("\\r?\\n");
-        List<Client> clientesList = new ArrayList<>();
+        Clients clients = new Clients();
         Arrays.stream(lines).forEach(c->{
             String[] line = c.split(uploadForm.getDelimiter());
             if(line.length==6){
                 Client client = new Client();
-                client.setDocumento(line[0]);
-                client.setNombre(line[1]);
-                client.setApellido(line[2]);
+                client.setDocument(line[0]);
+                client.setName(line[1]);
+                client.setLastName(line[2]);
                 client.setCreditCard(line[3]);
                 client.setType(line[4]);
                 client.setPhone(line[5]);
-                clientesList.add(client);
+                clients.addClient(client);
             }
         });
-        return clientesList;
+        return clients;
     }
 
-    List<Client> processXml(UploadForm uploadForm) {
-        List<Client> result = new ArrayList<>();
+    Clients processXml(UploadForm uploadForm) {
+        Clients clients = new Clients();
         try {
             JAXBContext jaxbContext;
             jaxbContext = JAXBContext.newInstance(Clients.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Clients clients = (Clients) jaxbUnmarshaller.unmarshal(new StringReader(uploadForm.getContent()));
-            result = clients.getClients();
+            clients = (Clients) jaxbUnmarshaller.unmarshal(new StringReader(uploadForm.getContent()));
         }
         catch (Exception e){
             System.out.println("Exception: "+e.getMessage());
         }
-        return result;
+        return clients;
     }
-    List<Client> processJson(UploadForm uploadForm) {
-        List<Client> result = new ArrayList<>();
+    Clients processJson(UploadForm uploadForm) {
+        Clients clients = new Clients();
         JSONObject json = new JSONObject(uploadForm.getContent());
         JSONArray clientes = json.getJSONArray("clientes");
         for(int i=0;i<clientes.length();i++){
             JSONObject cliente = clientes.getJSONObject(i);
             Client c = new Client();
-            c.setDocumento(cliente.get("documento").toString());
-            c.setNombre(cliente.get("primer-nombre").toString());
-            c.setApellido(cliente.get("apellido").toString());
+            c.setDocument(cliente.get("documento").toString());
+            c.setName(cliente.get("primer-nombre").toString());
+            c.setLastName(cliente.get("apellido").toString());
             c.setCreditCard(cliente.get("credit-card").toString());
             c.setType(cliente.get("tipo").toString());
             c.setPhone(cliente.get("telefono").toString());
-            result.add(c);
+            clients.addClient(c);
         }
-        return result;
+        return clients;
     }
 }

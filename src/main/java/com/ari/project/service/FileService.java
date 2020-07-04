@@ -13,5 +13,4 @@ public interface FileService {
     UploadedFile prepareFile(MultipartFile file) throws IOException;
     UploadedFile prepareJwt(String jwtToken);
     List<TransformedFile> process(UploadForm uploadForm);
-
 }

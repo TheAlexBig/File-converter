@@ -9,7 +9,9 @@ window.onload  = function (){
         element.click();
         document.body.removeChild(element);
     }
+
     const elements = document.querySelectorAll(".download");
+
     elements.forEach(function (e) {
         e.addEventListener("click", function(e){
             const element = e.target;

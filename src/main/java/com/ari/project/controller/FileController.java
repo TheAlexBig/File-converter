@@ -38,7 +38,7 @@ public class FileController {
     }
 
     @GetMapping("/")
-    public ModelAndView listUploadedFiles(@ModelAttribute("uploadedFile") UploadedFile uploadedFile) throws IOException {
+    public ModelAndView listUploadedFiles(@ModelAttribute("uploadedFile") UploadedFile uploadedFile)  {
         ModelAndView modelAndView = new ModelAndView("uploadForm");
         modelAndView.addObject("uploadForm", new UploadForm(uploadedFile));
         return modelAndView;
@@ -57,9 +57,9 @@ public class FileController {
         return new RedirectView("");
     }
 
-    @RequestMapping(value = "/action/{action}", method = RequestMethod.POST)
-    public String transformFile(Model model, @ModelAttribute("uploadForm") UploadForm uploadForm, @PathVariable String action) {
-        if(uploadForm.getType().equals(action)){
+    @RequestMapping(value = "/action/{type}", method = RequestMethod.POST)
+    public String transformFile(Model model, @ModelAttribute("uploadForm") UploadForm uploadForm, @PathVariable String type) {
+        if(uploadForm.getType().equals(type)){
             List<TransformedFile> transformFile = fileService.process(uploadForm);
             model.addAttribute("result", transformFile);
             return "resultForm";

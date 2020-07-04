@@ -1,14 +1,11 @@
 package com.ari.project.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UploadedFile {
     private String filename = "none";
     private String type = "none";
     private String ext = ".nothing";
     private String content = "";
-    private boolean created = false;
+    private boolean uploaded = false;
 
     public UploadedFile(){
     }
@@ -17,7 +14,7 @@ public class UploadedFile {
         type = uploadedFile.getType();
         ext = uploadedFile.getExt();
         content = uploadedFile.getContent();
-        created = uploadedFile.isCreated();
+        uploaded = uploadedFile.isUploaded();
     }
 
     public String getFilename() {
@@ -36,12 +33,12 @@ public class UploadedFile {
         this.type = type;
     }
 
-    public boolean isCreated() {
-        return created;
+    public boolean isUploaded() {
+        return uploaded;
     }
 
-    public void setCreated(boolean created) {
-        this.created = created;
+    public void setUploaded(boolean uploaded) {
+        this.uploaded = uploaded;
     }
 
     public String getExt() {

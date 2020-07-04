@@ -1,6 +1,7 @@
 package com.ari.project.util.transform;
 
 import com.ari.project.domain.Client;
+import com.ari.project.domain.Clients;
 import com.ari.project.domain.TransformedFile;
 import com.ari.project.form.UploadForm;
 
@@ -11,19 +12,19 @@ public abstract class TransformFile {
     private static final CastHub castHub = new CastHub();
 
     public static void toOtherFormats(UploadForm uploadForm, List<TransformedFile> transformFile){
-        List<Client> clientList;
+        Clients clients;
         switch (uploadForm.getType()){
             case "json":
-                clientList = clientExtractor.processJson(uploadForm);
-                castHub.forJson(uploadForm, transformFile, clientList);
+                clients = clientExtractor.processJson(uploadForm);
+                castHub.forJson(uploadForm, transformFile, clients);
                 break;
             case "xml":
-                clientList = clientExtractor.processXml(uploadForm);
-                castHub.forXml(uploadForm, transformFile, clientList);
+                clients = clientExtractor.processXml(uploadForm);
+                castHub.forXml(uploadForm, transformFile, clients);
                 break;
             case "txt":
-                clientList = clientExtractor.processTxt(uploadForm);
-                castHub.forTxt(uploadForm, transformFile, clientList);
+                clients = clientExtractor.processTxt(uploadForm);
+                castHub.forTxt(uploadForm, transformFile, clients);
                 break;
         }
     }

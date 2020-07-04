@@ -2,6 +2,7 @@ package com.ari.project.util.transform;
 
 import com.ari.project.component.JWTTokenComponent;
 import com.ari.project.domain.Client;
+import com.ari.project.domain.Clients;
 import com.ari.project.domain.TransformedFile;
 import com.ari.project.form.UploadForm;
 import com.ari.project.util.transform.cast.CastFile;
@@ -17,21 +18,21 @@ class CastHub {
     private final CastFile castToJSON = new CastToJSON();
     private final CastFile castToTXT = new CastToTXT();
 
-    void forTxt(UploadForm uploadForm, List<TransformedFile> transformFile, List<Client> clientesList){
-        castToXML.process(uploadForm, transformFile, clientesList);
-        castToJSON.process(uploadForm, transformFile, clientesList);
+    void forTxt(UploadForm uploadForm, List<TransformedFile> transformFile, Clients clients){
+        castToXML.process(uploadForm, transformFile, clients);
+        castToJSON.process(uploadForm, transformFile, clients);
         JWTTokenComponent.generateToken(uploadForm, transformFile);
     }
 
-    void forXml(UploadForm uploadForm, List<TransformedFile> transformFile, List<Client> clientesList){
-        castToTXT.process(uploadForm, transformFile, clientesList);
-        castToJSON.process(uploadForm, transformFile, clientesList);
+    void forXml(UploadForm uploadForm, List<TransformedFile> transformFile, Clients clients){
+        castToTXT.process(uploadForm, transformFile, clients);
+        castToJSON.process(uploadForm, transformFile, clients);
         JWTTokenComponent.generateToken(uploadForm, transformFile);
     }
 
-    void forJson(UploadForm uploadForm, List<TransformedFile> transformFile, List<Client> clientesList){
-        castToTXT.process(uploadForm, transformFile, clientesList);
-        castToXML.process(uploadForm, transformFile, clientesList);
+    void forJson(UploadForm uploadForm, List<TransformedFile> transformFile, Clients clients){
+        castToTXT.process(uploadForm, transformFile, clients);
+        castToXML.process(uploadForm, transformFile, clients);
         JWTTokenComponent.generateToken(uploadForm, transformFile);
     }
 }
