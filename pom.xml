@@ -6,13 +6,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.ari</groupId>
-    <artifactId>project-ARI</artifactId>
+        <artifactId>project-ARI</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>projectARI</name>
+    <name>project-ARI</name>
     <description>Proyecto de ARI</description>
 
     <properties>
@@ -40,6 +40,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
             <exclusions>
@@ -52,6 +57,7 @@
     </dependencies>
 
     <build>
+        <finalName>project-ARI</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
