@@ -9,9 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ari</groupId>
-    <artifactId>project</artifactId>
-    <version>1.0.war</version>
-    <name>project</name>
+    <artifactId>project-ARI</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+    <name>projectARI</name>
     <description>Proyecto de ARI</description>
 
     <properties>
