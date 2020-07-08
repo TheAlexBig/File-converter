@@ -1,5 +1,7 @@
 package com.ari.project.domain;
 
+import com.ari.project.util.Vigenere;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -23,5 +25,22 @@ public class Clients {
 
     public void addClient(Client client){
         clients.add(client);
+    }
+
+    public void decypherVigenere(String keyword){
+        if(!keyword.isEmpty()){
+            clients.forEach(c ->{
+                String encrypted = c.getCreditCard();
+                c.setCreditCard(Vigenere.decypherVigenere(encrypted, keyword));
+            });
+        }
+    }
+    public void cypherVigenere(String keyword){
+        if(!keyword.isEmpty()){
+            clients.forEach(c ->{
+                String encrypted = c.getCreditCard();
+                c.setCreditCard(Vigenere.cypherVigenere(encrypted, keyword));
+            });
+        }
     }
 }

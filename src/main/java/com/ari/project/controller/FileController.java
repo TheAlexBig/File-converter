@@ -57,6 +57,27 @@ public class FileController {
         return new RedirectView("");
     }
 
+    @RequestMapping(value = "/request/{type}", method = RequestMethod.POST, params = "action")
+    public String requestInfoDefault(Model model, @ModelAttribute("uploadForm") UploadForm uploadForm,
+                                     @PathVariable String type, @RequestParam("action") String action){
+        if(uploadForm.getType().equals(type)){
+            String lower = action.toLowerCase();
+            if(lower.matches("jwt|json")){
+                uploadForm.setTarget(lower);
+                List<TransformedFile> transformFile = fileService.process(uploadForm);
+                model.addAttribute("result", transformFile);
+                return "resultForm";
+            }
+           else if(lower.matches("xml|txt")) {
+                uploadForm.setTarget(lower);
+                model.addAttribute("uploadForm", uploadForm);
+                model.addAttribute("typeForm", lower);
+                return "typeForm";
+           }
+        }
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/action/{type}", method = RequestMethod.POST)
     public String transformFile(Model model, @ModelAttribute("uploadForm") UploadForm uploadForm, @PathVariable String type) {
         if(uploadForm.getType().equals(type)){

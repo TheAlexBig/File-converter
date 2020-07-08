@@ -40,6 +40,8 @@ class ClientExtractor {
             jaxbContext = JAXBContext.newInstance(Clients.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             clients = (Clients) jaxbUnmarshaller.unmarshal(new StringReader(uploadForm.getContent()));
+            String vigenere = uploadForm.getVigenere();
+            clients.decypherVigenere(vigenere);
         }
         catch (Exception e){
             System.out.println("Exception: "+e.getMessage());

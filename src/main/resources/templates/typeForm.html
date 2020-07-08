@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ARI</title>
+</head>
+<body>
+    <a th:href="@{/}">Subir otro archivo</a>
+    <h3>Es necesario especificar los siguientes parametros</h3>
+    <div th:if="${uploadForm.isUploaded()}">
+        <form th:object="${uploadForm}" th:modelAttribute="uploadForm" th:action="@{/action/{type}(type=${uploadForm.getType()})}" th:method="POST">
+            <div th:if="${uploadForm.getTarget().equals('xml')}">
+                <p id="vigenereXml"><label>Clave Vigenere: <input th:field="*{vigenere}" type="text" name="delimiter" /></label></p>
+            </div>
+            <div th:if="${uploadForm.getTarget().equals('txt')}" >
+                <p id="delimiterTxt"><label>Delimitador del documento: <input th:field="*{delimiter}" type="text" name="delimiter" /></label></p>
+            </div>
+            <input type="submit" name="do" value="Confirmar">
+        </form>
+    </div>
+</body>
+</html>

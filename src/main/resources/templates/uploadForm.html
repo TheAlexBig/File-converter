@@ -19,21 +19,15 @@
     </div>
     <div th:if="${uploadForm.isUploaded()}" >
         <a th:href="@{/}">Subir otro archivo</a>
-        <form th:object="${uploadForm}" th:modelAttribute="uploadForm" th:action="@{/action/{type}(type=${uploadForm.getType()})}" th:method="POST">
+        <form th:object="${uploadForm}" th:modelAttribute="uploadForm" th:action="@{/request/{type}(type=${uploadForm.getType()})}" th:method="POST">
             <h3 th:text="${uploadForm.getFilename()+'.'+uploadForm.getExt()}"></h3>
-            <p>El archivo fue identificado y se ha determinado que es un <label th:text="${uploadForm.getType()}"></label></p>
-            <div th:if="${uploadForm.getType().equals('json')}">
-                <p id="delimiterJson"><label>Delimitador (defecto ';'): <input th:field="*{delimiter}" type="text" name="delimiter" /></label></p>
-                <p id="vigenereJson"><label>Clave Vigenere (defecto 'k'): <input th:field="*{vigenere}" type="text" name="delimiter" /></label></p>
-            </div>
-            <div th:if="${uploadForm.getType().equals('xml')}">
-                <p id="delimiterXml"><label>Delimitador (defecto ';'): <input th:field="*{delimiter}" type="text" name="delimiter" /></label></p>
-                <p id="vigenereXml"><label>Clave Vigenere (defecto 'k'): <input th:field="*{vigenere}" type="text" name="delimiter" /></label></p>
-            </div>
-            <div th:if="${uploadForm.getType().equals('txt')}" >
-                <p id="delimiterTxt"><label>Delimitador (defecto ';'): <input th:field="*{delimiter}" type="text" name="delimiter" /></label></p>
-                <p id="vigenereTxt"><label>Clave Vigenere (defecto 'k'): <input th:field="*{vigenere}" type="text" name="delimiter" /></label></p>
-            </div>
+            <p>El archivo fue identificado como: <b th:text="${uploadForm.getType()}"></b></p>
+            <p><label th:if="${uploadForm.getType().equals('txt')}">Delimitador del documento: <input th:field="*{delimiter}" type="text" name="delimiter"  /></label></p>
+            <p><label th:if="${uploadForm.getType().equals('xml')}">Clave Vigenere: <input th:field="*{vigenere}" type="text" name="vigenere"  /></label></p>
+            <input th:if="${!uploadForm.getType().equals('txt')}" type="submit"  name="action" value="TXT" />
+            <input th:if="${!uploadForm.getType().equals('xml')}" type="submit"  name="action" value="XML" />
+            <input th:if="${!uploadForm.getType().equals('json')}" type="submit" name="action" value="JSON" />
+            <input th:if="${!uploadForm.getType().equals('jwt')}"  type="submit" name="action" value="JWT" />
             <p><label>Contenido del archivo: <br><textarea disabled th:text="${uploadForm.getContent()}"></textarea></label></p>
             <p><input type="submit"  th:value="Transformar"/></p>
         </form>

@@ -9,30 +9,27 @@ import com.ari.project.util.transform.cast.CastFile;
 import com.ari.project.util.transform.cast.CastToJSON;
 import com.ari.project.util.transform.cast.CastToTXT;
 import com.ari.project.util.transform.cast.CastToXML;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-@Component
+
 class CastHub {
-    private final CastFile castToXML = new CastToXML();
-    private final CastFile castToJSON = new CastToJSON();
-    private final CastFile castToTXT = new CastToTXT();
+    private final static CastFile castToXML = new CastToXML();
+    private final static CastFile castToJSON = new CastToJSON();
+    private final static CastFile castToTXT = new CastToTXT();
 
     void forTxt(UploadForm uploadForm, List<TransformedFile> transformFile, Clients clients){
-        castToXML.process(uploadForm, transformFile, clients);
-        castToJSON.process(uploadForm, transformFile, clients);
-        JWTTokenComponent.generateToken(uploadForm, transformFile);
+        castToTXT.process(uploadForm, transformFile, clients);
     }
 
     void forXml(UploadForm uploadForm, List<TransformedFile> transformFile, Clients clients){
-        castToTXT.process(uploadForm, transformFile, clients);
-        castToJSON.process(uploadForm, transformFile, clients);
-        JWTTokenComponent.generateToken(uploadForm, transformFile);
+        castToXML.process(uploadForm, transformFile, clients);
     }
 
     void forJson(UploadForm uploadForm, List<TransformedFile> transformFile, Clients clients){
-        castToTXT.process(uploadForm, transformFile, clients);
-        castToXML.process(uploadForm, transformFile, clients);
+        castToJSON.process(uploadForm, transformFile, clients);
+    }
+
+    void forJwt(UploadForm uploadForm, List<TransformedFile> transformFile){
         JWTTokenComponent.generateToken(uploadForm, transformFile);
     }
 }

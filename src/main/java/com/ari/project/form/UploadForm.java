@@ -3,10 +3,9 @@ package com.ari.project.form;
 import com.ari.project.domain.UploadedFile;
 
 public class UploadForm extends UploadedFile {
-    private String destination = "";
-    private String origin = "";
+    private String vigenere = "0";
     private String delimiter = ";";
-    private String vigenere = "k";
+    private String target = "txt";
 
     public UploadForm(){
     }
@@ -14,20 +13,12 @@ public class UploadForm extends UploadedFile {
         super(uploadedFile);
     }
 
-    public String getDestination() {
-        return destination;
+    public String getVigenere() {
+        return vigenere;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setVigenere(String vigenere) {
+        this.vigenere = vigenere;
     }
 
     public String getDelimiter() {
@@ -38,11 +29,11 @@ public class UploadForm extends UploadedFile {
         this.delimiter = delimiter;
     }
 
-    public String getVigenere() {
-        return vigenere;
+    public String getTarget() {
+        return target;
     }
 
-    public void setVigenere(String vigenere) {
-        this.vigenere = vigenere;
+    public void setTarget(String target) {
+        this.target = target;
     }
 }
