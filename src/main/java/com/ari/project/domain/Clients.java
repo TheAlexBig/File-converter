@@ -19,6 +19,12 @@ public class Clients {
         return clients;
     }
 
+    public Clients(List<Client> clients) {
+        this.clients = clients;
+    }
+
+    public Clients(){}
+
     public void setClients(List<Client> clients) {
         this.clients = clients;
     }

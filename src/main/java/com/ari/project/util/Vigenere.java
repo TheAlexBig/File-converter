@@ -4,7 +4,6 @@ public class Vigenere {
     
     public static String cypherVigenere(String entry, String keyword){
         String key = generateKey(entry, keyword);
-        
         StringBuilder result = new StringBuilder(0);
         for (int i = 0; i < entry.length(); i++){
             int x = (entry.charAt(i)-48 + (int)key.charAt(i)-48);
@@ -16,7 +15,6 @@ public class Vigenere {
     }
     public static String decypherVigenere(String entry, String keyword){
         String key = generateKey(entry, keyword);
-        System.out.println(key); 
         StringBuilder result = new StringBuilder(0);
         for (int i = 0; i < entry.length(); i++){
             int x = (Math.abs((entry.charAt(i)+48 - key.charAt(i)+48)));

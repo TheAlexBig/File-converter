@@ -36,8 +36,7 @@ class ClientExtractor {
     Clients processXml(UploadForm uploadForm) {
         Clients clients = new Clients();
         try {
-            JAXBContext jaxbContext;
-            jaxbContext = JAXBContext.newInstance(Clients.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Clients.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             clients = (Clients) jaxbUnmarshaller.unmarshal(new StringReader(uploadForm.getContent()));
             String vigenere = uploadForm.getVigenere();

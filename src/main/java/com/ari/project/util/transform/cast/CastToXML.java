@@ -1,13 +1,8 @@
 package com.ari.project.util.transform.cast;
 
-import com.ari.project.domain.Client;
 import com.ari.project.domain.Clients;
 import com.ari.project.domain.TransformedFile;
 import com.ari.project.form.UploadForm;
-import com.ari.project.util.Vigenere;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.StringWriter;

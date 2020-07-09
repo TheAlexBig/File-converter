@@ -22,8 +22,12 @@ public class TypeXML implements TypeFile {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new ByteArrayInputStream(entry.getBytes(StandardCharsets.UTF_8))));
         }
-        catch (IOException | SAXException e){
-            System.out.println("Exception: "+e.getMessage());
+        catch (IOException e){
+            System.out.println("File Exception: "+e.getMessage());
+            return false;
+        }
+        catch (SAXException e){
+            System.out.println("XML format Exception: "+e.getMessage());
             return false;
         }
         return true;
